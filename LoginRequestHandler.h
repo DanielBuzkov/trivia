@@ -1,7 +1,13 @@
 #pragma once
 
+//TODO
+//	login and signup newHandler?
+
 #include "Protocol.h"
 #include "RequestHandlerFactory.h"
+#include "JsonRequestPacketDeserializer.h"
+#include "JsonResponsePacketSerializer.h"
+#include "LoginManager.h"
 #include "IRequsetHandler.h"
 
 class LoginRequestHandler : public IRequsetHandler
@@ -9,13 +15,13 @@ class LoginRequestHandler : public IRequsetHandler
 public:
 	LoginRequestHandler();
 
-	bool isRequestRelevant(Request);
-	RequestResult handleRequest(Request);
+	bool isRequestRelevant(Request r);
+	RequestResult handleRequest(Request r);
 
 private:
 	LoginManager m_loginManager;
-	RequestHandlerFactory m_handlerFactory;
+	//RequestHandlerFactory m_handlerFactory;
 
-	RequestResult login(Request); 
-	RequestResult signup(Request);
+	RequestResult login(Request r);
+	RequestResult signup(Request r);
 };

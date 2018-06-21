@@ -12,5 +12,8 @@ private:
 	string m_username;
 
 public:
+	LoggedUser() {}
+	LoggedUser(string s){ m_username = s; }
+
 	string getUsername() { return m_username; }
 };

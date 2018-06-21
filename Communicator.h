@@ -2,11 +2,13 @@
 
 #include <map>
 #include <WinSock2.h>
+#include <thread>
 
 #include "IRequsetHandler.h"
 #include "RequestHandlerFactory.h"
 
 #include "RequestHandlerFactory.h"
+#include "JsonResponsePacketSerializer.h"
 
 using namespace std;
 
@@ -18,14 +20,16 @@ class Communicator
 {
 private:
 	map<SOCKET, IRequsetHandler> m_clients;
-	RequestHandlerFactory m_handlerFactory;
+	//RequestHandlerFactory m_handlerFactory;
 
 	//Addition
 	SOCKET _sock;
 
-	void startThreadForNewClient();
+	void startThreadForNewClient(SOCKET);
 
 public:
+	Communicator();
+
 	void bindAndListen();
 	void handleRequests();
 };
