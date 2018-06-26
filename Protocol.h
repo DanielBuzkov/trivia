@@ -179,7 +179,7 @@ struct SubmitAnswerResponse
 
 struct GetGameResultResponse
 {
-	unsigned int status = GET_GAME_STATUS_RESPONSE;
+	unsigned int status = GET_GAME_RESULTS_RESPONSE;
 	vector<PlayerResults> results;
 };
 
@@ -209,10 +209,10 @@ struct JoinRoomRequest
 
 struct CreateRoomRequest
 {
-	string roomName;
 	unsigned int maxUsers;
 	unsigned int questionCount;
 	unsigned int answerTimeout;
+	string roomName;
 };
 
 struct SubmitAnswerRequest

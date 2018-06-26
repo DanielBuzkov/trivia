@@ -19,7 +19,7 @@ private:
 	LoggedUser m_user;
 	RoomManager m_roomManager;
 	HighscoreTable m_highscoreTable;
-	RequestHandlerFactory m_handlerFactory;
+	//RequestHandlerFactory m_handlerFactory;
 
 	RequestResult signout(Request r);
 	RequestResult getRooms(Request r);

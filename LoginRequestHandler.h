@@ -1,7 +1,5 @@
 #pragma once
 
-//TODO
-//	login and signup newHandler?
 
 #include "Protocol.h"
 #include "RequestHandlerFactory.h"

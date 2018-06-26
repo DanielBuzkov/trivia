@@ -28,7 +28,7 @@ public:
 
 	unsigned int getRoomState(int ID)
 	{
-		//what?
+		
 	}
 	
 	vector<RoomData> getRooms()

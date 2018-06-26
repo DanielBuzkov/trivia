@@ -1,10 +1,10 @@
 #include "Communicator.h"
 
 //bindAndListen:
-//	bind to int?
+//	DONE : bind to int?
 //
 //handleRequests:
-//	pair<SOCEKT, IRequestHandler
+//	pair<SOCEKT, IRequestHandler>
 //	DONE : thread param
 
 Communicator::Communicator()
@@ -23,7 +23,7 @@ void Communicator::bindAndListen()
 	sa.sin_addr.s_addr = IFACE;
 	sa.sin_port = htons(PORT);
 
-	if (bind(_sock, (SOCKADDR*)&sa, sizeof(sa)) == SOCKET_ERROR)
+	if (::bind(_sock, (SOCKADDR*)&sa, sizeof(sa)) == SOCKET_ERROR)
 		throw exception("Error in bind function");
 
 	if (listen(_sock, SOMAXCONN) == SOCKET_ERROR)

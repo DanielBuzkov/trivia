@@ -62,6 +62,7 @@ RequestResult GameRequestHandler::getGameResults(Request r)
 RequestResult GameRequestHandler::leaveGame(Request r)
 {
 	RequestResult success;
+	//success.Response = JsonResponsePacketSerializer::serializeResponse(LeaveGameResponse()); where is it?
 	success.newHandler = &RequestHandlerFactory::createMenuRequestHandler();
 
 	return success;

@@ -7,7 +7,6 @@ MenuRequestHandler::MenuRequestHandler()
 	m_user = LoggedUser();
 	m_roomManager = RoomManager();
 	m_highscoreTable = HighscoreTable();
-	m_handlerFactory = RequestHandlerFactory();
 }
 
 bool MenuRequestHandler::isRequestRelevant(Request r)

@@ -1,6 +1,7 @@
 #pragma once
 //TODO
 //	getQuestions
+//	+more
 
 
 #include <list>
@@ -27,12 +28,18 @@ private:
 		return 0;
 	}
 
-	static int findUserCallback(void* res, int argc, char** argv, char** azCol)
+	static int countCallback(void* res, int argc, char** argv, char** azCol)
 	{
 		int*  ret = (int*)res;
 		*ret = atoi(argv[0]);
 
 		return 0;
+	}
+
+	static int callbackPersonalStatus(void* res, int argc, char** argv, char** azCol)
+	{
+		vector<string> ret;
+		ret.insert(argv[0]);
 	}
 
 public:
@@ -54,7 +61,7 @@ public:
 	map<LoggedUser, int> getHighscores()
 	{
 		//Top 3 scores
-		std::string query = "SELECT username, sum(is_correct) as ans from t_players_answers group by username order by ans DESC limit 3";
+		std::string query = "SELECT username, sum(is_correct) as ans from players_answers group by username order by ans DESC limit 3";
 
 		map<LoggedUser, int> res;
 
@@ -68,11 +75,11 @@ public:
 	
 	bool doesUserExiste(string username)
 	{
-		std::string query = "SELECT count(*) FROM t_users where username = \'" + username + "\'";
+		std::string query = "SELECT count(*) FROM Users where username = \'" + username + "\'";
 
 		int res = 0;
 		char *zErrMsg = 0;
-		if (sqlite3_exec(_sqlite, query.c_str(), findUserCallback, &res, &zErrMsg) != SQLITE_OK)
+		if (sqlite3_exec(_sqlite, query.c_str(), countCallback, &res, &zErrMsg) != SQLITE_OK)
 		{
 			//ERROR
 			sqlite3_free(zErrMsg);
@@ -85,7 +92,7 @@ public:
 
 	bool addNewUser(string username, string password, string email)
 	{
-		std::string sql = "insert into t_users (username, password, email) values(\'" + username + "\', \'" + password + "\', \'" + email + "\')";
+		std::string sql = "insert into Users (username, password, email) values(\'" + username + "\', \'" + password + "\', \'" + email + "\')";
 		char *zErrMsg = 0;
 		int m = sqlite3_exec(_sqlite, sql.c_str(), nullptr, nullptr, &zErrMsg);
 
@@ -100,18 +107,17 @@ public:
 
 	bool isUserAndPassMatch(string username, string password)
 	{
-		std::string sql = "select count(*) from t_users where username = \'" + username + "\' and password = \'" + password + "\'";
+		std::string sql = "select count(*) from Users where username = \'" + username + "\' and password = \'" + password + "\'";
 		int res = 0;
 
 		char *zErrMsg = 0;
-		int m = sqlite3_exec(_sqlite, sql.c_str(), findUserCallback, &res, &zErrMsg);
+		int m = sqlite3_exec(_sqlite, sql.c_str(), countCallback, &res, &zErrMsg);
 
 		if (m != SQLITE_OK)
 		{
 			sqlite3_free(zErrMsg);
 			return false;
 		}
-
 
 		return res == 1;
 	}
@@ -136,7 +142,7 @@ public:
 
 	vector<string> getPersonalStatus(string username)
 	{
-		std::string sql = "select  count(distinct game_id), sum(is_correct) as  correct, count(*) - sum(is_correct), avg(answer_time) from t_players_answers where username = '" + username + "'";
+		std::string sql = "select  count(distinct game_id), sum(is_correct) as  correct, count(*) - sum(is_correct), avg(answer_time) from players_answers where username = '" + username + "'";
 
 		vector<std::string> res;
 

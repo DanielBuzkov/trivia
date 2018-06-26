@@ -1,5 +1,7 @@
 #pragma once
 
+//unclear
+
 #include "Question.h"
 #include "Protocol.h"
 #include "LoggedUser.h"

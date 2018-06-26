@@ -6,8 +6,6 @@
 #include "LoginManager.h"
 #include "IRequsetHandler.h"
 
-//TODO
-//	update next stage handler
 
 class RoomAdminRequestHandler : public IRequsetHandler
 {
@@ -21,7 +19,7 @@ private:
 	Room m_room;
 	LoggedUser m_user;
 	RoomManager m_roomManager;
-	RequestHandlerFactory m_handlerFactory;
+	//RequestHandlerFactory m_handlerFactory;
 
 	RequestResult closeRoom(Request r);
 	RequestResult startGame(Request r);

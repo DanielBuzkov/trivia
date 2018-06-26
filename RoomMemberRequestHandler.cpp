@@ -5,7 +5,6 @@ RoomMemberRequestHandler::RoomMemberRequestHandler()
 	m_room = Room();
 	m_user = LoggedUser();
 	m_roomManager = RoomManager();
-	m_handlerFactory = RequestHandlerFactory();
 }
 
 bool RoomMemberRequestHandler::isRequestRelevant(Request r)
